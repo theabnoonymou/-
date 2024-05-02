@@ -1,3 +1,5 @@
+const moment = require("moment-timezone");
+
 module.exports.config = {
     name: 'help',
     version: '1.0.0',
@@ -35,7 +37,7 @@ module.exports.run = async function({
             eventCommands.forEach((eventCommand, index) => {
                 helpMessage += `  ╭─────────────────╮\n  | 『 ${index + 1}.』  ${prefix}${eventCommand}\n  ╰─────────────────╯ \n`;
             });
-            helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}help 2'. To view information about a specific command, type '${prefix}help command name'.\n\n`;
+            helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}help 2'. To view information about a specific command, type '${prefix}help command name'.\n\n𝗖𝗥𝗘𝗔𝗧𝗢𝗥: https://www.facebook.com/itssmekylebaitit\n\n𝙲𝚁𝙴𝙰𝚃𝙴 𝚈𝙾𝚄𝚁 𝙾𝚆𝙽 𝙱𝙾𝚃 𝙷𝙴𝚁𝙴: https://automatedbot.onrender.com\n\n🗓️ | ⏰ 𝙳𝚊𝚝𝚎 & 𝚃𝚒𝚖𝚎:\n${formattedDateTime}`;
             api.sendMessage(helpMessage, event.threadID, event.messageID);
         } else if (!isNaN(input)) {
             if (input === '2') {
@@ -47,7 +49,7 @@ module.exports.run = async function({
                 for (let i = start; i < Math.min(end, commands.length); i++) {
                     helpMessage += `  ╭─╮\n  | 『 ${i + 1}.』  ${prefix}${commands[i]}\n  ╰─────────────❍\n`;
                 }
-                helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the previous page, type '${prefix}help'. To view information about a specific command, type '${prefix}help command name'.\n\n`;
+                helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the previous page, type '${prefix}help'. To view information about a specific command, type '${prefix}help command name'.\n\n𝗖𝗥𝗘𝗔𝗧𝗢𝗥: https://www.facebook.com/itssmekylebaitit\n\n𝙲𝚁𝙴𝙰𝚃𝙴 𝚈𝙾𝚄𝚁 𝙾𝚆𝙽 𝙱𝙾𝚃 𝙷𝙴𝚁𝙴: https://automatedbot.onrender.com\n\n🗓️ | ⏰ 𝙳𝚊𝚝𝚎 & 𝚃𝚒𝚖𝚎:\n${formattedDateTime}`;
                 api.sendMessage(helpMessage, event.threadID, event.messageID);
             } else {
                 // Remaining code remains unchanged
@@ -73,5 +75,7 @@ module.exports.handleEvent = async function({
     const message = prefix ? 'This is my prefix: ' + prefix : "Sorry i don't have prefix";
     if (body?.toLowerCase().startsWith('prefix')) {
         api.sendMessage(message, threadID, messageID);
+        const manilaTime = moment.tz('Asia/Manila');
+        const formattedDateTime = manilaTime.format('MMMM D, YYYY h:mm A');
     }
 }
