@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 
 module.exports.config = {
-    name: "random",
+    name: "shoti",
     version: "1.9.0",
     hasPermission: 0,
     credits: "Anonymous", // modified by Joshua Apostol
@@ -11,7 +11,7 @@ module.exports.config = {
     commandCategory: "other",
     usages: "[random]",
     cooldowns: 9,
-    usePrefix: true,
+    usePrefix: false,
 };
 
 module.exports.run = async function ({ api, event }) {
@@ -30,7 +30,7 @@ module.exports.run = async function ({ api, event }) {
         fs.writeFileSync(randomPath, Buffer.from(dl.data, "utf-8"));
 
         api.sendMessage({
-            body: `Random tiktok video\n\nUsername: ${username}\nNickname: ${nickname}\nTitle: ${title}`,
+            body: `Random shoti tiktok girl video\n\nUsername: ${username}\nNickname: ${nickname}\nTitle: ${title}`,
             attachment: fs.createReadStream(randomPath)
         }, event.threadID, event.messageID);
     } catch (err) {
